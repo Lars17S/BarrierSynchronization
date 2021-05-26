@@ -9,7 +9,7 @@ typedef pthread_barrier_t barrier_t;
 
 #define barrier_init(barrier, count) pthread_barrier_init(barrier, NULL, count)
 #define barrier_destroy(barrier) pthread_barrier_destroy(barrier)
-#define barrier_wait(barrier) pthread_barrier_destroy(barrier)
+#define barrier_wait(barrier) pthread_barrier_wait(barrier)
 
 #else //POSIX_BARRIERS
 

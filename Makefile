@@ -1,7 +1,11 @@
 CC = gcc
+CFLAGS = -lpthread
+COMMON_FILES = parallel_sum.c numbers_list.h barrier.h
 
-parallel_sum_custom: parallel_sum.c barrier.h barrier.c
-	$(CC) -o parallel_sum_custom parallel_sum.c barrier.h barrier.c
+all: parallel_sum_custom parallel_sum_posix
 
-parallel_sum_posix: parallel_sum.c barrier.h
-	$(CC) -o parallel_sum_posix -DPOSIX_BARRIERS parallel_sum.c barrier.h
+parallel_sum_custom: $(COMMON_FILES) barrier.c
+	$(CC) -o parallel_sum_custom $(CFLAGS) $(COMMON_FILES) barrier.c
+
+parallel_sum_posix: $(COMMON_FILES)
+	$(CC) -o parallel_sum_posix -DPOSIX_BARRIERS $(CFLAGS) $(COMMON_FILES)
