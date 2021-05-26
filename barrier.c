@@ -43,7 +43,7 @@ int barrier_wait(barrier_t *barrier) {
 
   if (barrier->threads_left == 1) {
     pthread_mutex_unlock(&(barrier->thread_counters_mutex));
-    for (int i = 0; i < barrier->threads_waiting; ++i) {
+    for (unsigned int i = 0; i < barrier->threads_waiting; ++i) {
       sem_post(&(barrier->semaphore));
     }
     return 0;
