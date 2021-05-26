@@ -29,14 +29,14 @@ void *thread_fn(void *arg) {
 
 int main() {
   barrier_t barrier;
-  barrier_init(&barrier, NUM_THREADS + 1);
+  barrier_init(&barrier, 0, NUM_THREADS + 1);
 
   pthread_t threads[NUM_THREADS];
   struct thread_args args[NUM_THREADS] = {
-      { 1, &barrier, numbers_list + numbers_list_limits[0], numbers_list + numbers_list_limits[1], 0 },
-      { 2, &barrier, numbers_list + numbers_list_limits[1], numbers_list + numbers_list_limits[2], 0 },
-      { 3, &barrier, numbers_list + numbers_list_limits[2], numbers_list + numbers_list_limits[3], 0 },
-      { 4, &barrier, numbers_list + numbers_list_limits[3], numbers_list + numbers_list_limits[4], 0 },
+      {1, &barrier, numbers_list + numbers_list_limits[0], numbers_list + numbers_list_limits[1], 0},
+      {2, &barrier, numbers_list + numbers_list_limits[1], numbers_list + numbers_list_limits[2], 0},
+      {3, &barrier, numbers_list + numbers_list_limits[2], numbers_list + numbers_list_limits[3], 0},
+      {4, &barrier, numbers_list + numbers_list_limits[3], numbers_list + numbers_list_limits[4], 0},
   };
 
   for (int i = 0; i < NUM_THREADS; ++i) {

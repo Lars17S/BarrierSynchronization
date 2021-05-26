@@ -1,6 +1,7 @@
 # Barrier Synchronization
 
-Barrier synchronization is a concurrency issue used in parallel applications that involve processes and threads. This project contains a custom implementation of a barrier in C.
+Barrier synchronization is a concurrency issue used in parallel applications that involve processes and threads. This
+project contains a custom implementation of a barrier in C.
 
 ## Execute the example
 

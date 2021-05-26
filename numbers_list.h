@@ -284,6 +284,6 @@ static int numbers_list[] = {
 };
 
 // The limits were purposely left unequal so that some threads take more time finishing the task
-const static int numbers_list_limits[] = { 0, 16, 128, 1024, 8192 };
+const static int numbers_list_limits[] = {0, 16, 128, 1024, 8192};
 
 #endif //NUMBERS_LIST_H

@@ -9,3 +9,6 @@ parallel_sum_custom: $(COMMON_FILES) barrier.c
 
 parallel_sum_posix: $(COMMON_FILES)
 	$(CC) -o parallel_sum_posix -DPOSIX_BARRIERS $(CFLAGS) $(COMMON_FILES)
+
+clean:
+	-rm parallel_sum_posix parallel_sum_custom *.o
