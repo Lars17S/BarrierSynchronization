@@ -35,6 +35,8 @@
 *.i*86
 *.x86_64
 *.hex
+/parallel_sum_posix
+/parallel_sum_custom
 
 # Debug files
 *.dSYM/
@@ -42,11 +44,6 @@
 *.idb
 *.pdb
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# Intellij config files
+/.idea
+/cmake-build-debug
