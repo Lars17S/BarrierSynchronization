@@ -39,6 +39,8 @@
 /parallel_sum_posix
 /sleepy_threads_custom
 /sleepy_threads_posix
+/thousand_threads_custom
+/thousand_threads_posix
 
 # Debug files
 *.dSYM/

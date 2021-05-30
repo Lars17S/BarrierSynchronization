@@ -19,3 +19,11 @@ target_link_libraries(sleepy_threads_custom pthread)
 add_executable(sleepy_threads_posix examples/sleepy_threads.c)
 target_compile_definitions(sleepy_threads_posix PRIVATE POSIX_BARRIERS)
 target_link_libraries(sleepy_threads_posix pthread)
+
+# Thousand threads waiting benchmark
+add_executable(thousand_threads_custom benchmarks/thousand_threads_waiting.c ${BARRIER_SRC_FILES})
+target_link_libraries(thousand_threads_custom pthread)
+
+add_executable(thousand_threads_posix benchmarks/thousand_threads_waiting.c)
+target_compile_definitions(thousand_threads_posix PRIVATE POSIX_BARRIERS)
+target_link_libraries(thousand_threads_posix pthread)
