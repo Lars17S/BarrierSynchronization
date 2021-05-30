@@ -3,12 +3,19 @@
 Barrier synchronization is a concurrency issue used in parallel applications that involve processes and threads. This
 project contains a custom implementation of a barrier in C.
 
-## Execute the example
+## Examples
 
-To compile the provided parallel sum example you can run either:
+We have included two examples: `parallel_sum` and `sleepy_threads`.
 
-- `make parallel_sum_posix` to create an executable with the default POSIX barriers
-- `make parallel_sum_custom` to create an executable with our implementation of barriers
+Each example has two versions: `[example]_custom` and `[example]_posix` with our custom implementation of a memory
+barrier and the POSIX implementation respectively.
+
+To compile all the examples you can run `make all` or to compile only one you can run:
+
+- `make parallel_sum_posix`
+- `make parallel_sum_custom`
+- `make sleepy_threads_posix`
+- `make sleepy_threads_custom`
 
 ## Team
 

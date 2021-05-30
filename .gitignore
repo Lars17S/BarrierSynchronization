@@ -35,8 +35,10 @@
 *.i*86
 *.x86_64
 *.hex
-/parallel_sum_posix
 /parallel_sum_custom
+/parallel_sum_posix
+/sleepy_threads_custom
+/sleepy_threads_posix
 
 # Debug files
 *.dSYM/

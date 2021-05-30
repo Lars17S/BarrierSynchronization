@@ -2,22 +2,6 @@
 #define BARRIERS_H
 
 #include <pthread.h>
-
-#ifdef POSIX_BARRIERS
-
-typedef pthread_barrier_t barrier_t;
-
-#define barrier_init(barrier, pshared, count)       \
-  do {                                              \
-    pthread_barrierattr_t attr;                     \
-    pthread_barrierattr_setpshared(&attr, pshared); \
-    pthread_barrier_init(barrier, &attr, count);    \
-  } while (0)
-#define barrier_destroy(barrier) pthread_barrier_destroy(barrier)
-#define barrier_wait(barrier) pthread_barrier_wait(barrier)
-
-#else //POSIX_BARRIERS
-
 #include <semaphore.h>
 
 struct barrier_impl {
@@ -51,7 +35,5 @@ int barrier_destroy(barrier_t *barrier);
  * @return 0 on success, else an error number
  */
 int barrier_wait(barrier_t *barrier);
-
-#endif //POSIX_BARRIERS
 
 #endif //BARRIERS_H
