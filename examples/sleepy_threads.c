@@ -20,7 +20,7 @@ typedef pthread_barrier_t barrier_t;
 #define barrier_destroy(barrier) pthread_barrier_destroy(barrier)
 #define barrier_wait(barrier) pthread_barrier_wait(barrier)
 
-#endif //POSIX_BARRIERS
+#endif // POSIX_BARRIERS
 
 #define NUM_THREADS 4
 
@@ -33,7 +33,8 @@ struct thread_args {
 void *thread_fn(void *arg) {
   struct thread_args *args = (struct thread_args *) arg;
   usleep(args->sleep_time);
-  printf("Thread %d slept for %d milliseconds\n", args->thread_idx, args->sleep_time / 1000);
+  printf("Thread %d slept for %d milliseconds\n", args->thread_idx,
+         args->sleep_time / 1000);
   barrier_wait(args->barrier);
   pthread_exit(NULL);
 }

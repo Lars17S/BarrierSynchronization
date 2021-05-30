@@ -1,5 +1,5 @@
-#ifndef BARRIERS_H
-#define BARRIERS_H
+#ifndef BARRIER_H
+#define BARRIER_H
 
 #include <pthread.h>
 #include <semaphore.h>
@@ -7,7 +7,7 @@
 struct barrier_impl {
     sem_t semaphore;
     unsigned int threads_waiting;
-    unsigned int threads_left;
+    unsigned int threads_running;
     pthread_mutex_t thread_counters_mutex;
 };
 
@@ -36,4 +36,4 @@ int barrier_destroy(barrier_t *barrier);
  */
 int barrier_wait(barrier_t *barrier);
 
-#endif //BARRIERS_H
+#endif // BARRIER_H

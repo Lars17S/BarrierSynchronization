@@ -20,13 +20,14 @@ typedef pthread_barrier_t barrier_t;
 #define barrier_destroy(barrier) pthread_barrier_destroy(barrier)
 #define barrier_wait(barrier) pthread_barrier_wait(barrier)
 
-#endif //POSIX_BARRIERS
+#endif // POSIX_BARRIERS
 
 #define NUM_THREADS 4
 
 #define NUMBERS_LIST_SIZE 8192
 int numbers_list[NUMBERS_LIST_SIZE];
-// The limits were purposely left unequal so that some threads take more time finishing the task
+// The limits were purposely left unequal so that some threads
+// take more time finishing the task
 static const int limits[] = {0, 16, 128, 1024, NUMBERS_LIST_SIZE};
 
 struct thread_args {
@@ -44,7 +45,8 @@ void *thread_fn(void *arg) {
     args->total += *(args->list_iterator);
     ++(args->list_iterator);
   }
-  printf("Thread %d finished the sum with a total of %lld\n", args->thread_idx, args->total);
+  printf("Thread %d finished the sum with a total of %lld\n",
+         args->thread_idx, args->total);
   barrier_wait(args->barrier);
   pthread_exit(NULL);
 }
@@ -59,12 +61,14 @@ int main() {
   }
 
   pthread_t threads[NUM_THREADS];
-  struct thread_args args[NUM_THREADS] = {
-      {1, &barrier, numbers_list + limits[0], numbers_list + limits[1], 0},
-      {2, &barrier, numbers_list + limits[1], numbers_list + limits[2], 0},
-      {3, &barrier, numbers_list + limits[2], numbers_list + limits[3], 0},
-      {4, &barrier, numbers_list + limits[3], numbers_list + limits[4], 0},
-  };
+  struct thread_args args[NUM_THREADS];
+  for (int i = 0; i < NUM_THREADS; ++i) {
+    args[i].thread_idx = i + 1;
+    args[i].barrier = &barrier;
+    args[i].list_iterator = numbers_list + limits[i];
+    args[i].list_end = numbers_list + limits[i + 1];
+    args[i].total = 0;
+  }
 
   for (int i = 0; i < NUM_THREADS; ++i) {
     pthread_create(&threads[i], NULL, thread_fn, &args[i]);

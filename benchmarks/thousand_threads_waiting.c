@@ -20,7 +20,7 @@ typedef pthread_barrier_t barrier_t;
 #define barrier_destroy(barrier) pthread_barrier_destroy(barrier)
 #define barrier_wait(barrier) pthread_barrier_wait(barrier)
 
-#endif //POSIX_BARRIERS
+#endif // POSIX_BARRIERS
 
 #define NUM_THREADS 1000
 

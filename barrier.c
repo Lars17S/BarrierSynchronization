@@ -18,7 +18,7 @@ int barrier_init(barrier_t *barrier, int pshared, unsigned int count) {
     return errno;
   }
   barrier->threads_waiting = 0;
-  barrier->threads_left = count;
+  barrier->threads_running = count;
   int mutex_error = pthread_mutex_init(&(barrier->thread_counters_mutex), NULL);
   if (mutex_error != 0) {
     return mutex_error;
@@ -41,7 +41,7 @@ int barrier_destroy(barrier_t *barrier) {
 int barrier_wait(barrier_t *barrier) {
   pthread_mutex_lock(&(barrier->thread_counters_mutex));
 
-  if (barrier->threads_left == 1) {
+  if (barrier->threads_running == 1) {
     pthread_mutex_unlock(&(barrier->thread_counters_mutex));
     for (unsigned int i = 0; i < barrier->threads_waiting; ++i) {
       sem_post(&(barrier->semaphore));
@@ -49,7 +49,7 @@ int barrier_wait(barrier_t *barrier) {
     return 0;
   }
 
-  --(barrier->threads_left);
+  --(barrier->threads_running);
   ++(barrier->threads_waiting);
   pthread_mutex_unlock(&(barrier->thread_counters_mutex));
   return sem_wait(&(barrier->semaphore));
