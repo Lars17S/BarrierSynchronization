@@ -39,6 +39,8 @@
 /parallel_sum_posix
 /sleepy_threads_custom
 /sleepy_threads_posix
+/parallel_sum_test_barrier
+/parallel_sum_test_no_barrier
 /thousand_threads_custom
 /thousand_threads_posix
 

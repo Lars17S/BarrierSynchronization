@@ -15,6 +15,10 @@ To compile all the examples you can run `make examples` or to compile only one y
 - `make sleepy_threads_custom`
 - `make sleepy_threads_posix`
 
+## Tests
+
+We also included a test to explain the use of barrier synchronization. The test spawns 4 threads that calculate the sum of a list of numbers in parallel and then the main thread prints the total. The version with barrier synchronization waits until the threads have finished calculating to add up the partial results, and the version without barriers calculates the result without waiting for the threads to finish. Running `make parallel_sum_test` compiles both versions: `parallel_sum_test_barrier` and `parallel_sum_test_no_barrier`.
+
 ## Benchmarks
 
 We also included a benchmark named `thousand_threads_waiting.c`. It creates a thousand threads, makes the last one sleep for 10 milliseconds and then wakes all the threads up. You can compile both versions with the command `make thousand_threads` and then comparing how long they take to execute.

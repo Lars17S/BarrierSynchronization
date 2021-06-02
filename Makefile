@@ -3,8 +3,9 @@ CFLAGS = -lpthread
 
 BARRIER_FILES = barrier.h barrier.c
 
-all: examples benchmarks
+all: examples tests benchmarks
 examples: parallel_sum sleepy_threads
+tests: parallel_sum_test
 benchmarks: thousand_threads
 
 # Parallel sum example
@@ -29,6 +30,16 @@ sleepy_threads_posix:
 	$(CC) -o sleepy_threads_posix -DPOSIX_BARRIERS $(CFLAGS) $(SLEEPY_THREADS_FILES)
 
 
+# Parallel sum test
+PARALLEL_SUM_TEST_FILES = tests/parallel_sum_test.c
+parallel_sum_test: parallel_sum_test_barrier parallel_sum_test_no_barrier
+
+parallel_sum_test_barrier: $(PARALLEL_SUM_TEST_FILES) $(BARRIER_FILES)
+	$(CC) -o parallel_sum_test_barrier $(CFLAGS) $(PARALLEL_SUM_TEST_FILES) $(BARRIER_FILES)
+
+parallel_sum_test_no_barrier: $(PARALLEL_SUM_TEST_FILES)
+	$(CC) -o parallel_sum_test_no_barrier -DNO_BARRIER $(CFLAGS) $(PARALLEL_SUM_TEST_FILES)
+
 # Thousand threads waiting benchmark
 THOUSAND_THREADS_FILES = benchmarks/thousand_threads_waiting.c
 thousand_threads: thousand_threads_custom thousand_threads_posix
@@ -44,4 +55,5 @@ clean:
 	-rm \
 		parallel_sum_posix parallel_sum_custom \
 		sleepy_threads_custom sleepy_threads_posix \
+		parallel_sum_test_barrier parallel_sum_test_no_barrier \
 		thousand_threads_custom thousand_threads_posix
